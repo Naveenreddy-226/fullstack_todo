@@ -17,9 +17,16 @@ function hello(){
   method: 'GET',
 })
   .then((res) => res.json())
-  .then((data) =>{
-    const f=data[0].task;
-    document.getElementById('data').textContent=f;
+  .then((data) => {
+    // Assuming 'data' is an array of user objects
+    let output = '';
+
+    data.forEach((user) => {
+      // Customize based on the structure of your user object
+      output += `<li>${user.task}</li>`;
+    });
+
+    document.getElementById('data').innerHTML = `<ul>${output}</ul>`;
   })
   .catch((err) => console.error('Error:', err));
 }
