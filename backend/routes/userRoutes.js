@@ -1,7 +1,16 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../models/user');
-
+const auth =require('../models/auth')
+router.post('/register',async(req,res)=>{
+    try{
+        const newauth=new auth(req.body);
+        const details= await newauth.save();
+        res.status(201).json(details);
+    }catch (err){
+        res.status(400).json({error:err.message});
+    }
+});
 // Create
 router.post('/', async (req, res) => {
     try {
