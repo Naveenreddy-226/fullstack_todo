@@ -1,33 +1,50 @@
-function hello(){
-    const text=document.getElementById('hello').value;
-    fetch('http://localhost:5000/api/users', {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json',
-  },
-  body: JSON.stringify({
-    task:text,
-  }),
-})
-  .then((res) => res.json())
-  .then((data) => console.log('Saved:', data))
-  .catch((err) => console.error('Error:', err));
+function hello() {
+  const text = document.getElementById('hello').value;
 
+  // POST new task
   fetch('http://localhost:5000/api/users', {
-  method: 'GET',
-})
-  .then((res) => res.json())
-  .then((data) => {
-    // Assuming 'data' is an array of user objects
-    let output = '';
-
-    data.forEach((user) => {
-      // Customize based on the structure of your user object
-      output += `<li>${user.task}</li>`;
-    });
-
-    document.getElementById('data').innerHTML = `<ul>${output}</ul>`;
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ task: text }),
   })
-  .catch((err) => console.error('Error:', err));
-}
+    .then((res) => res.json())
+    .then(() => {
+      // After POST, fetch all users
+      return fetch('http://localhost:5000/api/users');
+    })
+    .then((res) => res.json())
+    .then((data) => {
+      const ol = document.createElement('ol');
 
+      data.forEach((user) => {
+        const li = document.createElement('li');
+        li.textContent = user.task + '     ';
+
+        const button = document.createElement('button');
+        button.textContent = 'Delete';
+
+        // DELETE button functionality
+        button.addEventListener('click', () => {
+          fetch(`http://localhost:5000/api/users/${user._id}`, {
+            method: 'DELETE',
+          })
+            .then((res) => res.json())
+            .then(() => {
+              // Remove the item from the DOM
+              li.remove();
+            })
+            .catch((err) => console.error('Delete error:', err));
+        });
+
+        li.appendChild(button);
+        ol.appendChild(li);
+      });
+
+      const dataContainer = document.getElementById('data');
+      dataContainer.innerHTML = ''; // clear previous content
+      dataContainer.appendChild(ol);
+    })
+    .catch((err) => console.error('Error:', err));
+}
