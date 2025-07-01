@@ -1,15 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Task Manager</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      padding: 20px;
+      max-width: 600px;
+      margin: auto;
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+
+    label {
+      font-weight: bold;
+    }
+
+    input[type="text"] {
+      width: 70%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    button {
+      padding: 10px 15px;
+      border: none;
+      background-color: #28a745;
+      color: white;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-left: 10px;
+    }
+
+    button:hover {
+      background-color: #218838;
+    }
+
+    ol {
+      padding-left: 20px;
+      margin-top: 20px;
+    }
+
+    li {
+      background: white;
+      margin: 8px 0;
+      padding: 10px;
+      border-radius: 5px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border: 1px solid #ddd;
+    }
+
+    li button {
+      background-color: #dc3545;
+    }
+
+    li button:hover {
+      background-color: #c82333;
+    }
+  </style>
 </head>
 <body>
-    <label for="hello">TASK:</label>
-    <input type="text" id="hello">
-    <button onclick="hello()">submit</button>
-    <script src="script.js"></script>
-    <div id="data"></div>
+  <h1>Task Manager</h1>
+  <label for="hello">Task:</label>
+  <input type="text" id="hello" placeholder="Enter your task..." />
+  <button onclick="hello()">Submit</button>
+
+  <div id="data"></div>
+
+  <script src="script.js"></script>
 </body>
 </html>
