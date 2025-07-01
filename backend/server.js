@@ -14,7 +14,7 @@ app.use(bodyParser.json());
 app.use('/api/users', userRoutes);
 
 // MongoDB Connection
-mongoose.connect('mongodb://127.0.0.1:27017/crud_db', {
+mongoose.connect(url, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 }).then(() => console.log("MongoDB Connected"))
